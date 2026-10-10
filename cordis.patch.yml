@@ -1,0 +1,26 @@
+# dsh-plugin-workbuddy bundle patch.
+#
+# The row id (`llm-workbuddy`) is the settings namespace the Models page uses
+# for this provider's credential field, so it must stay stable.
+#
+# The row name is the package's own npm name: the loader resolves it from the
+# installed package (profile node_modules), exactly like every official bundle
+# row. No file:/// URLs and no absolute paths, so the package installs as-is
+# from GitHub or npm on any machine.
+- insert:
+    - id: llm-workbuddy
+      name: dsh-plugin-workbuddy
+      config:
+        displayName: WorkBuddy
+        # 'cli' exposes the 20 chat models the installed WorkBuddy CLI runs;
+        # 'all' exposes every entry in the account catalog (53 on a fresh snapshot).
+        scope: cli
+        multiplierInName: true
+        # Persist the per-model context-length choice next to the WorkBuddy
+        # catalog. Leave empty for the default (~/.workbuddy), or 'off' to
+        # disable persistence (choices then last for the current process only).
+        contextWindowStorePath: ''
+        # Diagnostics are opt-in: set `debugLogPath` (an id-targeted config
+        # override in the profile patch is the usual way) to make the plugin
+        # append a breadcrumb trail to that file. Unset = silent, which is
+        # right for distribution.
