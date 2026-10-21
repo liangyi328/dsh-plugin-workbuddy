@@ -4,6 +4,9 @@
   "description": "WorkBuddy model provider for DeepSeek Harness: registers the WorkBuddy model catalog with each model's credit multiplier (倍率)",
   "type": "module",
   "main": "lib/index.js",
+  "bin": {
+    "dsh-plugin-workbuddy": "lib/bin.js"
+  },
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
